@@ -11,7 +11,8 @@ const skillsUrl = 'https://edwardtanguay.vercel.app/share/skills.json';
 	document.querySelector('#app').innerHTML = `
   <div>
   <h1>Webdev Skill Quiz</h1>
-  <p>Welcome to this site.</p>
+    <p>There are ${jobs.length} jobs.</p>
+    <p>There are ${skills.length} skills.</p>
   </div>
 `;
 })();
