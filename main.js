@@ -2,7 +2,8 @@ import axios from 'axios';
 import './style.scss';
 
 const config = {
-	numberOfQuestions: 5
+	numberOfQuestions: 5,
+	displayingDescriptions: false
 };
 
 const jobsUrl = 'https://edwardtanguay.vercel.app/share/jobs.json';
@@ -13,7 +14,7 @@ const displaySkill = (skill) => {
 	html += `
 <div class="skill">
     <div class="name">${skill.name}</div>
-    <div class="description">${skill.description}</div>
+    <div class="description" style="display:none">${skill.description}</div>
 </div>
 `;
 	return html;
@@ -40,10 +41,30 @@ const displaySkill = (skill) => {
 		return html;
 	};
 
+	const attachEvents = () => {
+		const btnToggleAnswersElem =
+			document.querySelector('.btnToggleAnswers');
+		btnToggleAnswersElem.addEventListener('click', () => {
+			const descriptionElems = document.querySelectorAll('.description');
+			config.displayingDescriptions = !config.displayingDescriptions;
+			descriptionElems.forEach((elem) => {
+				if (config.displayingDescriptions) {
+					elem.style.display = 'block';
+				} else {
+					elem.style.display = 'none';
+				}
+			});
+		});
+	};
+
 	document.querySelector('#app').innerHTML = `
   <div>
   <h1>Webdev Skill Quiz</h1>
+  <div class="commandArea">
+    <button class="btnToggleAnswers">Toggle Answers</button>
+</div>
   ${displayQuizHtml()}
   </div>
 `;
+	attachEvents();
 })();
