@@ -8,11 +8,24 @@ const skillsUrl = 'https://edwardtanguay.vercel.app/share/skills.json';
 	const jobs = (await axios.get(jobsUrl)).data;
 	const skills = (await axios.get(skillsUrl)).data;
 
+  const displayQuizHtml = () => {
+    let html = '<div class="quizArea">';
+    for (const skill of skills) {
+        html += `
+<div class="skill">
+    <div class="name">${skill.name}</div>
+    <div class="description">${skill.description}</div>
+</div>
+`;
+    }
+html += '</div>';
+    return html;
+};
+
 	document.querySelector('#app').innerHTML = `
   <div>
   <h1>Webdev Skill Quiz</h1>
-    <p>There are ${jobs.length} jobs.</p>
-    <p>There are ${skills.length} skills.</p>
+  ${displayQuizHtml()}
   </div>
 `;
 })();
