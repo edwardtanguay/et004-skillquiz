@@ -22,7 +22,6 @@ const displaySkill = (skill) => {
 (async () => {
 	const jobs = (await axios.get(jobsUrl)).data;
 	const skills = (await axios.get(skillsUrl)).data;
-
 	const getQuizSkills = () => {
 		const randomSkills = [];
 		for (let i = 0; i < config.numberOfQuestions; i++) {
